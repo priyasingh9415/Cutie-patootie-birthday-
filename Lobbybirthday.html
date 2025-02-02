@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #ffdde1, #ee9ca7);
+      font-family: 'Arial', sans-serif;
+      color: #333;
+      text-align: center;
+      padding: 50px;
+      overflow: hidden;
+    }
+    .container {
+      background-color: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      width: 80%;
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+    }
+    h1 {
+      font-size: 40px;
+      color: #ff6347;
+      font-family: 'Dancing Script', cursive;
+      margin-bottom: 20px;
+    }
+    .message {
+      font-size: 24px;
+      margin-bottom: 30px;
+      color: #555;
+    }
+    .balloon {
+      background-color: #ff69b4;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: inline-block;
+      margin: 10px;
+      cursor: pointer;
+      animation: float 3s infinite ease-in-out;
+    }
+    .balloon:nth-child(even) {
+      background-color: #add8e6;
+    }
+    .balloon:nth-child(odd) {
+      background-color: #ffff99;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-25px); }
+      100% { transform: translateY(0); }
+    }
+    .footer {
+      margin-top: 40px;
+      font-size: 18px;
+      color: #777;
+    }
+    /* Flower decorations floating */
+    .flower {
+      font-size: 30px;
+      position: absolute;
+      top: -50px;
+      animation: fall 5s infinite linear;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+    /* Boomer text effect */
+    .boomer {
+      font-size: 22px;
+      font-weight: bold;
+      color: #ff4500;
+      margin-top: 20px;
+      display: inline-block;
+      animation: wiggle 1s infinite alternate;
+    }
+    @keyframes wiggle {
+      0% { transform: rotate(-5deg); }
+      100% { transform: rotate(5deg); }
+    }
+  </style>
+</head>
+<body onclick="triggerConfetti()">
+
+  <div class="container">
+    <h1>🌸 So now half century days (50) are left for your birthday! 🌼</h1>
+    <div class="message">
+      Happy birthday in advance, cutie patootie ❤️🫠! You make everyone’s lives so much better just by being yourself ❤️.
+    </div>
+    <div class="balloons">
+      <div class="balloon" onclick="popBalloon(event)"></div>
+      <div class="balloon" onclick="popBalloon(event)"></div>
+      <div class="balloon" onclick="popBalloon(event)"></div>
+      <div class="balloon" onclick="popBalloon(event)"></div>
+      <div class="balloon" onclick="popBalloon(event)"></div>
+    </div>
+    <div class="boomer">Haha, almost a boomer now 🧓!</div>
+    <div class="footer">
+      You are just perfect, handsome 😭🫠!
+    </div>
+  </div>
+
+  <!-- Floating Flowers -->
+  <script>
+    function createFlower() {
+      let flower = document.createElement("div");
+      flower.classList.add("flower");
+      flower.innerHTML = ["🌸", "🌺", "🌼"][Math.floor(Math.random() * 3)];
+      flower.style.left = Math.random() * 100 + "vw";
+      flower.style.animationDuration = Math.random() * 3 + 3 + "s"; // Random fall speed
+      document.body.appendChild(flower);
+
+      setTimeout(() => {
+        flower.remove();
+      }, 5000);
+    }
+    setInterval(createFlower, 1000);
+  </script>
+
+  <!-- Confetti & Balloon Popping -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+  
+  <script>
+    function triggerConfetti() {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    }
+
+    function popBalloon(event) {
+      event.target.style.opacity = "0";
+      setTimeout(() => {
+        event.target.remove();
+      }, 500);
+      confetti({
+        particleCount: 50,
+        spread: 50,
+        origin: { x: event.clientX / window.innerWidth, y: event.clientY / window.innerHeight }
+      });
+    }
+
+    // Initial confetti burst
+    setTimeout(triggerConfetti, 2000);
+  </script>
+  
+</body>
+</html>
